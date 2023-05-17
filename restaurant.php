@@ -58,7 +58,7 @@
               <div class="container">
                 <h4>Rating</h4>
                 <p>5 stars</p>
-                <a href="#" class="btn btn-success">View Menu</a>
+                <a href="dishes.php" class="btn btn-success">View Menu</a>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
               <div class="container">
                 <h4>Rating</h4>
                 <p>5 stars</p>
-                <a href="#" class="btn btn-success">View Menu</a>
+                <a href="dishes.php" class="btn btn-success">View Menu</a>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
               <div class="container">
                 <h4>Rating</h4>
                 <p>5 stars</p>
-                <a href="#" class="btn btn-success">View Menu</a>
+                <a href="dishes.php" class="btn btn-success">View Menu</a>
               </div>
             </div>
           </div>

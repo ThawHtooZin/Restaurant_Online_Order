@@ -38,7 +38,44 @@
     <hr>
     <!-- Second Container -->
     <div class="container form-control mt-5">
-
+      <form action="checkout.php" method="post">
+        <h3>Cart Summary</h3>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <p>Cart SubTotal</p>
+          </div>
+          <div class="col">
+            <p>$125.25</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <p>Shipping & Handing</p>
+          </div>
+          <div class="col">
+            <p>shipping free</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <p>Total</p>
+          </div>
+          <div class="col">
+            <p>$125.25</p>
+          </div>
+        </div>
+        <hr>
+        <input type="radio" name="paymentsystem" value="paydelivered"><p class="h5 d-inline">Payment on delivary</p>
+        <br>
+        <input type="radio" name="paymentsystem" value="paypal"><p class="h5 d-inline">PayPal</p>
+        <hr>
+        <div class="row">
+          <button type="submit" class="btn btn-success">Order Now</button>
+        </div>
+      </form>
     </div>
     <!-- Second Container ends -->
   </body>

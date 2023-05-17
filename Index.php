@@ -49,7 +49,7 @@
                   <p>$14.4</p>
                 </div>
                 <div class="col">
-                  <a href="order.php" class="btn btn-success">Order Now</a>
+                  <a href="dishes.php" class="btn btn-success">Order Now</a>
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
                   <p>$14.4</p>
                 </div>
                 <div class="col">
-                  <a href="order.php" class="btn btn-success">Order Now</a>
+                  <a href="dishes.php" class="btn btn-success">Order Now</a>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
                   <p>$14.4</p>
                 </div>
                 <div class="col">
-                  <a href="order.php" class="btn btn-success">Order Now</a>
+                  <a href="dishes.php" class="btn btn-success">Order Now</a>
                 </div>
               </div>
             </div>
@@ -136,70 +136,78 @@
       </div>
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2">
-                  <img src="images/restaurant1.jpg" alt="" width="100%">
-                </div>
-                <div class="col-10">
-                  <b>Restaurant1</b>
-                  <p>Lorem ipsum dolor sit amet,</p>
-                  <p>Open 24hours 4.5stars</p>
+          <a href="dishes.php" style="text-decoration:none; color:black;">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="images/restaurant1.jpg" alt="" width="100%">
+                  </div>
+                  <div class="col-10">
+                    <b>Restaurant1</b>
+                    <p>Lorem ipsum dolor sit amet,</p>
+                    <p>Open 24hours 4.5stars</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2">
-                  <img src="images/restaurant2.jpg" alt="" width="100%">
-                </div>
-                <div class="col-10">
-                  <b>Restaurant2</b>
-                  <p>Lorem ipsum dolor sit amet,</p>
-                  <p>Open 24hours 4.5stars</p>
+          <a href="dishes.php" style="text-decoration:none; color:black;">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="images/restaurant2.jpg" alt="" width="100%">
+                  </div>
+                  <div class="col-10">
+                    <b>Restaurant2</b>
+                    <p>Lorem ipsum dolor sit amet,</p>
+                    <p>Open 24hours 4.5stars</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2">
-                  <img src="images/restaurant1.jpg" alt="" width="100%">
-                </div>
-                <div class="col-10">
-                  <b>Restaurant1</b>
-                  <p>Lorem ipsum dolor sit amet,</p>
-                  <p>Open 24hours 4.5stars</p>
+          <a href="dishes.php" style="text-decoration:none; color:black;">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="images/restaurant1.jpg" alt="" width="100%">
+                  </div>
+                  <div class="col-10">
+                    <b>Restaurant1</b>
+                    <p>Lorem ipsum dolor sit amet,</p>
+                    <p>Open 24hours 4.5stars</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2">
-                  <img src="images/restaurant2.jpg" alt="" width="100%">
-                </div>
-                <div class="col-10">
-                  <b>Restaurant2</b>
-                  <p>Lorem ipsum dolor sit amet,</p>
-                  <p>Open 24hours 4.5stars</p>
+          <a href="dishes.php" style="text-decoration:none; color:black;">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img src="images/restaurant2.jpg" alt="" width="100%">
+                  </div>
+                  <div class="col-10">
+                    <b>Restaurant2</b>
+                    <p>Lorem ipsum dolor sit amet,</p>
+                    <p>Open 24hours 4.5stars</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
