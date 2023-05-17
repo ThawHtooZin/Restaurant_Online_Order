@@ -16,31 +16,9 @@
     }
   </style>
   <body>
-    <!-- Navbar Starts -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ps-5 pe-5 transparent">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Foodie..</a>
-        <div class="float-end">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="restaurant.php">Restaurant</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="signin.php">Signin</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- Navbar ends -->
+    <?php
+    include 'navbar.php';
+    ?>
     <!-- First Container Intro -->
     <div class="bg-image text-light">
       <h1 class="text-center pt-10">Restaurant Website</h1>
@@ -139,7 +117,121 @@
     </div>
     <!-- third container ends -->
     <!-- Firth Container Restaurant -->
-    
+    <div class="container pt-5 pb-5">
+      <div class="row">
+        <div class="col">
+          <h1>Featured Restaurants</h1>
+        </div>
+        <div class="col" style="line-height:50px;">
+          <a href="" class="text-secondary ps-2" style="text-decoration:none;">All </a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Grill</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Steak</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pasta</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pizza</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Grill</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Steak</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pasta</a>
+          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pizza</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <img src="images/restaurant1.jpg" alt="" width="100%">
+                </div>
+                <div class="col-10">
+                  <b>Restaurant1</b>
+                  <p>Lorem ipsum dolor sit amet,</p>
+                  <p>Open 24hours 4.5stars</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <img src="images/restaurant2.jpg" alt="" width="100%">
+                </div>
+                <div class="col-10">
+                  <b>Restaurant2</b>
+                  <p>Lorem ipsum dolor sit amet,</p>
+                  <p>Open 24hours 4.5stars</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <img src="images/restaurant1.jpg" alt="" width="100%">
+                </div>
+                <div class="col-10">
+                  <b>Restaurant1</b>
+                  <p>Lorem ipsum dolor sit amet,</p>
+                  <p>Open 24hours 4.5stars</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <img src="images/restaurant2.jpg" alt="" width="100%">
+                </div>
+                <div class="col-10">
+                  <b>Restaurant2</b>
+                  <p>Lorem ipsum dolor sit amet,</p>
+                  <p>Open 24hours 4.5stars</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Firth Container Ends -->
+    <!-- Footer -->
+    <div class="bg-dark p-5">
+      <div class="row p-5 text-light">
+        <div class="col">
+          <h3>Restaurants Service Web Application</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="col ps-5">
+          <h3>Useful Links</h3>
+          <ul style="list-style:none;">
+            <li><a href="Index.php" class="text-light">Home</a></li>
+            <li><a href="restaurant.php" class="text-light">Restaurants</a></li>
+            <li><a href="login.php" class="text-light">Login</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Sent Us A Mail</h3>
+          <label>Your Email</label>
+          <input type="text" class="form-control" placeholder="your email">
+          <label>Your Message</label>
+          <textarea rows="4" cols="80" class="form-control" placeholder="your message"></textarea>
+          <br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-light ps-5 pe-5">Sent</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer ends -->
   </body>
 </html>
