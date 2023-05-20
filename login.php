@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'config/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -22,6 +26,28 @@
     }
   </style>
   <body style="background: #ddd;">
+    <?php
+    if($_POST){
+      if(empty($_POST['username']) || empty($_POST['password'])){
+        if(empty($_POST['username'])){
+          $usererror = "The Username field is required";
+        }
+        if(empty($_POST['password'])){
+          $passerror = "The Password field is required";
+        }
+      }else{
+        $username = $_POST['username'];
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username='$username'");
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($data['password'] == $_POST['password']){
+          echo "<script>window.location.href='Index.php';</script>";
+          $_SESSION['username'] = $data['username'];
+          $_SESSION['logged_in'] = true;
+        }
+      }
+    }
+    ?>
     <?php include 'navbar.php'; ?>
     <div class="container">
       <div class="card w-25">
@@ -33,8 +59,10 @@
           <br><br>
           <form action="login.php" method="post">
             <input type="text" name="username" placeholder="Username" class="form-control border border-success border-3">
+            <p class="text-center"><?php if(!empty($usererror)){ echo $usererror; } ?></p>
             <br>
             <input type="password" name="password" placeholder="Password" class="form-control border border-success border-3">
+            <p class="text-center"><?php if(!empty($passerror)){ echo $passerror; } ?></p>
             <br>
             <div class="container">
               <div class="row">

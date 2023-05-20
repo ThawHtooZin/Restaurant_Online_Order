@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(empty($_SESSION['username']) && empty($_SESSION['logged_in'])){
+  header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
