@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config/connect.php';
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
   <?php
-  $stmt = $pdo->prepare("SELECT * FROM users");
+  $stmt = $pdo->prepare("SELECT * FROM res_category");
   $stmt->execute();
   $datas = $stmt->fetchall();
   ?>
@@ -49,10 +50,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="card-header">
         <div class="row">
           <div class="col">
-            <h3 class="card-title">User Admin Page</h3>
+            <h3 class="card-title">Restaurant Admin Page</h3>
           </div>
           <div class="col">
-            <h3 class="card-title" style="float:right;"><a href="user_add.php" class="btn btn-success"> + ADD</a></h3>
+            <h3 class="card-title" style="float:right;"><a href="restaurant_category_add.php" class="btn btn-success"> + ADD</a></h3>
           </div>
         </div>
       </div>
@@ -62,13 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <thead>
           <tr>
             <th>#</th>
-            <th>Username</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Password</th>
-            <th>Address</th>
+            <th>Category Name</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -78,16 +73,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             ?>
             <tr>
               <td><?php echo $data['id']; ?></td>
-              <td><?php echo $data['username']; ?></td>
-              <td><?php echo $data['firstname']; ?></td>
-              <td><?php echo $data['lastname']; ?></td>
-              <td><?php echo $data['email']; ?></td>
-              <td><?php echo $data['phonenumber']; ?></td>
-              <td><?php echo $data['password']; ?></td>
-              <td><?php echo $data['address']; ?></td>
+              <td><?php echo $data['category_name']; ?></td>
               <th>
-                <a href="user_update.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Update</a>
-                <a href="user_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a>
+                <a href="restaurant_update.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Update</a>
+                <a href="restaurant_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a>
               </th>
             </tr>
             <?php

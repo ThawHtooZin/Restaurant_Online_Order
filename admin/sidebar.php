@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-light-primary elevation-4 bg-success">
+<aside class="main-sidebar sidebar-light-light elevation-4 bg-success">
   <!-- Brand Logo -->
   <a href="index.php" class="brand-link" style="text-align:center;">
     <span class="brand-text font-weight-light" style="font-size:30px;">Admin Dashboard</span>
@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-2 d-flex bg-light">
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="logout.php" class="d-block"><?php echo $_SESSION['username']; ?></a>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
         <li class="nav-item menu-open">
           <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="far fa-circle nav-icon"></i>
             <p>
               Dashboard
               <i class="right fas fa-angle-left"></i>
@@ -33,7 +33,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="index.php" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
             </li>
@@ -52,12 +52,27 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="restaurant_admin.php" class="nav-link">
-            <i class="bi bi-shop"></i>
+          <a href="#" class="nav-link active">
+            <i class="far fa-circle nav-icon"></i>
             <p>
-              Restaurants
+              Restaurant
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="restaurant_admin.php" class="nav-link active">
+                <i class="bi bi-shop"></i>
+                <p>Restaurants</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="restaurant_category_admin.php" class="nav-link active">
+                <i class="bi bi-shop-window"></i>
+                <p>Restaurant Categories</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a href="dishes_admin.php" class="nav-link">

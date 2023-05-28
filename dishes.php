@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'config/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -41,12 +45,20 @@
           <div class="col-1">
 
           </div>
+          <?php
+          $res_name = $_GET['res_name'];
+          $stmt = $pdo->prepare("SELECT * FROM restaurant WHERE name=:res_name");
+          $stmt->execute(
+            array(':res_name' => $res_name)
+          );
+          $data = $stmt->fetch(PDO::FETCH_ASSOC);
+          ?>
           <div class="col-2">
-            <img src="images/restaurant1.jpg" alt="" width="100%">
+            <img src="images/product_image/<?php echo $data['image']; ?>" alt="" width="100%">
           </div>
           <div class="col-8">
-            <h2 class="mt-4">Restaurant 1</h2>
-            <p>Location : North Okkalapa</p>
+            <h2 class="mt-4"><?php echo $data['name']; ?></h2>
+            <p>Location : <?php echo $data['location']; ?></p>
           </div>
           <div class="col-1">
 
@@ -109,61 +121,35 @@
         </div>
         <div class="col-9">
           <div class="form-control">
+            <?php
+            $res_name = $_GET['res_name'];
+            $stmt = $pdo->prepare("SELECT * FROM dishes WHERE restaurant=:res_name");
+            $stmt->execute(
+              array(':res_name' => $res_name)
+            );
+            $data = $stmt->fetchall();
+            foreach ($data as $datas) {
+            ?>
             <!-- row -->
             <div class="row">
               <div class="col-2">
-                <img src="images/chicken meal.jpg" alt="" width="100%">
+                <img src="images/<?php echo $datas['image']; ?>" alt="" width="100%">
               </div>
               <div class="col-6">
-                <b>Chicken Meal</b>
-                <p>Chicken meal the have a cheeze</p>
+                <b><?php echo $datas['name']; ?></b>
+                <p><?php echo $datas['description']; ?></p>
               </div>
               <div class="col-4">
-                <p>prize: $22.23</p>
+                <p>prize: <?php echo $datas['price']; ?>ks</p>
                 <form action="dishes.php" method="post">
                   <input type="number" name="quantity" value="1">
                   <button type="submit" class="btn btn-success">Add to Cart</button>
                 </form>
               </div>
             </div>
-            <hr>
-            <!-- row ends -->
-            <!-- row -->
-            <div class="row">
-              <div class="col-2">
-                <img src="images/chicken meal.jpg" alt="" width="100%">
-              </div>
-              <div class="col-6">
-                <b>Chicken Meal</b>
-                <p>Chicken meal the have a cheeze</p>
-              </div>
-              <div class="col-4">
-                <p>prize: $22.23</p>
-                <form action="dishes.php" method="post">
-                  <input type="number" name="quantity" value="1">
-                  <button type="submit" class="btn btn-success">Add to Cart</button>
-                </form>
-              </div>
-            </div>
-            <hr>
-            <!-- row ends -->
-            <!-- row -->
-            <div class="row">
-              <div class="col-2">
-                <img src="images/chicken meal.jpg" alt="" width="100%">
-              </div>
-              <div class="col-6">
-                <b>Chicken Meal</b>
-                <p>Chicken meal the have a cheeze</p>
-              </div>
-              <div class="col-4">
-                <p>prize: $22.23</p>
-                <form action="dishes.php" method="post">
-                  <input type="number" name="quantity" value="1">
-                  <button type="submit" class="btn btn-success">Add to Cart</button>
-                </form>
-              </div>
-            </div>
+            <?php
+            }
+            ?>
             <hr>
             <!-- row ends -->
           </div>

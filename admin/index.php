@@ -1,6 +1,12 @@
 <?php
-
+  session_start();
   include 'config/connect.php';
+  if(empty($_SESSION['user_id']) && empty($_SESSION['logged_in'])){
+    header("location: login.php");
+  }
+  if($_SESSION['role'] != 1){
+    header("location: login.php");
+  }
 ?>
 <!DOCTYPE html>
 <!--
@@ -23,10 +29,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
   <?php
+  // users
   $userstmt = $pdo->prepare("SELECT * FROM users");
   $userstmt->execute();
   $userdatas = $userstmt->fetchall();
   $userrows = count($userdatas);
+  // restaurant
+  $restaurantstmt = $pdo->prepare("SELECT * FROM restaurant");
+  $restaurantstmt->execute();
+  $restaurantdatas = $restaurantstmt->fetchall();
+  $restaurantrows = count($restaurantdatas);
+  // dishes
+  $dishesstmt = $pdo->prepare("SELECT * FROM dishes");
+  $dishesstmt->execute();
+  $dishesdatas = $dishesstmt->fetchall();
+  $dishesrows = count($dishesdatas);
   ?>
 <div class="wrapper">
 
@@ -69,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="inner">
                 <div class="row">
                   <div class="col-9">
-                    <h3>150</h3>
+                    <h3><?php echo $restaurantrows; ?></h3>
                     <p>Restaurants</p>
                   </div>
                   <div class="col-3">
@@ -82,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="restaurant_admin.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -92,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="inner">
                 <div class="row">
                   <div class="col-9">
-                    <h3>53</h3>
+                    <h3><?php echo $dishesrows; ?></h3>
                     <p>Dishes</p>
                   </div>
                   <div class="col-3">
@@ -105,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="dishes_admin.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -138,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="inner">
                 <div class="row">
                   <div class="col-9">
-                    <h3>65</h3>
+                    <h3>0</h3>
                     <p>Order</p>
                   </div>
                   <div class="col-3">
@@ -151,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="order_admin.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
