@@ -44,6 +44,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $dishesstmt->execute();
   $dishesdatas = $dishesstmt->fetchall();
   $dishesrows = count($dishesdatas);
+  // order
+  $orderstmt = $pdo->prepare("SELECT * FROM users_orders");
+  $orderstmt->execute();
+  $orderdatas = $orderstmt->fetchall();
+  $orderrows = count($orderdatas);
   ?>
 <div class="wrapper">
 
@@ -155,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="inner">
                 <div class="row">
                   <div class="col-9">
-                    <h3>0</h3>
+                    <h3><?php echo $orderrows; ?></h3>
                     <p>Order</p>
                   </div>
                   <div class="col-3">

@@ -47,6 +47,7 @@ include 'config/connect.php';
           </div>
           <?php
           $res_name = $_GET['res_name'];
+          $_SESSION['res_name'] = $res_name;
           $stmt = $pdo->prepare("SELECT * FROM restaurant WHERE name=:res_name");
           $stmt->execute(
             array(':res_name' => $res_name)
@@ -76,45 +77,39 @@ include 'config/connect.php';
               <b>Your Shopping Cart</b>
             </div>
             <div class="card-body">
+              <?php
+                $stmt = $pdo->prepare("SELECT * FROM cart");
+                $stmt->execute();
+                $datas = $stmt->fetchall();
+                foreach ($datas as $data) {
+              ?>
+
               <!--  -->
               <div class="row">
                 <div class="col">
-                  <p>Chicken Meal</p> <form action="dishes.php" method="post">
+                  <p><?php echo $data['food_name'] ?></p>
                 </div>
                 <div class="col">
-                  <button type="button" name="decrease" class="btn btn-danger">delete</button>
+                  <a href="del_cart_item.php?id=<?php echo $data['food_id']; ?>" class="btn btn-danger">Delete</a>
                 </div>
               </div>
-              </form>
-              <input type="text" name="" value="$15.21"><input type="text" name="" value="1">
+            <?php
+            $dish_name =$data['food_name'];
+            $stmt = $pdo->prepare("SELECT * FROM dishes WHERE name=:dishname");
+            $stmt->execute(
+              array(':dishname' => $dish_name)
+            );
+            $data2 = $stmt->fetch(PDO::FETCH_ASSOC);
+            ?>
+            price:
+              <input type="text" name="" value="<?php echo $data['food_quantity'] * $data2['price']; ?>" disabled>
+            quantity:
+              <input type="text" name="" value="<?php echo $data['food_quantity']; ?>" disabled>
               <hr>
               <!--  -->
-              <!--  -->
-              <div class="row">
-                <div class="col">
-                  <p>Chicken Meal</p> <form action="dishes.php" method="post">
-                </div>
-                <div class="col">
-                  <button type="button" name="decrease" class="btn btn-danger">delete</button>
-                </div>
-              </div>
-              </form>
-              <input type="text" name="" value="$15.21"><input type="text" name="" value="1">
-              <hr>
-              <!--  -->
-              <!--  -->
-              <div class="row">
-                <div class="col">
-                  <p>Chicken Meal</p> <form action="dishes.php" method="post">
-                </div>
-                <div class="col">
-                  <button type="button" name="decrease" class="btn btn-danger">delete</button>
-                </div>
-              </div>
-              </form>
-              <input type="text" name="" value="$15.21"><input type="text" name="" value="1">
-              <hr>
-              <!--  -->
+              <?php
+                }
+              ?>
               <a href="checkout.php" class="btn btn-success">checkout</a>
             </div>
           </div>
@@ -122,13 +117,18 @@ include 'config/connect.php';
         <div class="col-9">
           <div class="form-control">
             <?php
-            $res_name = $_GET['res_name'];
             $stmt = $pdo->prepare("SELECT * FROM dishes WHERE restaurant=:res_name");
             $stmt->execute(
               array(':res_name' => $res_name)
             );
+
             $data = $stmt->fetchall();
             foreach ($data as $datas) {
+              if(!empty($_POST['quantity'])){$_SESSION['food_quantity'] = $_POST['quantity'];};
+              $_SESSION['res_name'] = $_GET['res_name'];
+            ?>
+            <?php
+
             ?>
             <!-- row -->
             <div class="row">
@@ -141,9 +141,12 @@ include 'config/connect.php';
               </div>
               <div class="col-4">
                 <p>prize: <?php echo $datas['price']; ?>ks</p>
-                <form action="dishes.php" method="post">
-                  <input type="number" name="quantity" value="1">
-                  <button type="submit" class="btn btn-success">Add to Cart</button>
+                <form action="cart_add.php" method="post">
+                  <input type="hidden" name="food_id" value="<?php echo $datas['id']; ?>">
+                  <input type="hidden" name="food_name" value="<?php echo $datas['name']; ?>">
+                  <input type="hidden" name="res_name" value="<?php echo $_GET['res_name']; ?>">
+                  <input type="number" name="food_quantity" value="1">
+                  <button type="submit" class="btn btn-success">Add To Cart</button>
                 </form>
               </div>
             </div>

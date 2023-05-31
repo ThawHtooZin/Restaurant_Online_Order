@@ -1,3 +1,6 @@
+<?php
+include 'config/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -5,6 +8,7 @@
     <title></title>
   </head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style media="screen">
     .bg-image{
       background-image: url('images/background.jpg');
@@ -124,91 +128,75 @@
         </div>
         <div class="col" style="line-height:50px;">
           <a href="" class="text-secondary ps-2" style="text-decoration:none;">All </a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Grill</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Steak</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pasta</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pizza</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Grill</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Steak</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pasta</a>
-          <a href="" class="text-secondary ps-4" style="text-decoration:none;">Pizza</a>
+          <?php
+          $stmt = $pdo->prepare("SELECT DISTINCT res_category FROM restaurant");
+          $stmt->execute();
+          $datas = $stmt->fetchall();
+          foreach ($datas as $data) {
+            ?>
+            <a href="" class="text-secondary ps-4" style="text-decoration:none;"><?php echo $data['res_category']; ?></a>
+            <?php
+          }
+          ?>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <a href="dishes.php" style="text-decoration:none; color:black;">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <img src="images/restaurant1.jpg" alt="" width="100%">
-                  </div>
-                  <div class="col-10">
-                    <b>Restaurant1</b>
-                    <p>Lorem ipsum dolor sit amet,</p>
-                    <p>Open 24hours 4.5stars</p>
-                  </div>
-                </div>
-              </div>
+      <?php
+      $stmt = $pdo->prepare("SELECT * FROM restaurant");
+      $stmt->execute();
+      $datas = $stmt->fetchall();
+      foreach ($datas as $data) {
+      ?>
+      <div class="card">
+        <a href="dishes.php?res_name=<?php echo $data['name']; ?>" style="text-decoration:none; color:black;">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="images/product_image/<?php echo $data['image']; ?>" alt="" width="100%">
             </div>
-          </a>
-        </div>
-        <div class="col">
-          <a href="dishes.php" style="text-decoration:none; color:black;">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <img src="images/restaurant2.jpg" alt="" width="100%">
-                  </div>
-                  <div class="col-10">
-                    <b>Restaurant2</b>
-                    <p>Lorem ipsum dolor sit amet,</p>
-                    <p>Open 24hours 4.5stars</p>
-                  </div>
-                </div>
-              </div>
+            <div class="col-9">
+              <b><?php echo $data['name']; ?></b>
+              <p><?php echo $data['description']; ?></p>
+              <p>
+                <?php
+                switch ($data['rating']) {
+                  case '1':
+                    echo '<i class="bi bi-star-fill"></i>';
+                    break;
+                  case '1.5':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>';
+                    break;
+                  case '2':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                    break;
+                  case '2.5':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>';
+                    break;
+                  case '3':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                    break;
+                  case '3.5':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>';
+                    break;
+                  case '4':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                    break;
+                  case '4.5':
+                      echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>';
+                      break;
+                  case '5':
+                    echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                    break;
+                }
+                ?>
+              </p>
             </div>
-          </a>
+          </div>
         </div>
+        </a>
       </div>
-      <div class="row">
-        <div class="col">
-          <a href="dishes.php" style="text-decoration:none; color:black;">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <img src="images/restaurant1.jpg" alt="" width="100%">
-                  </div>
-                  <div class="col-10">
-                    <b>Restaurant1</b>
-                    <p>Lorem ipsum dolor sit amet,</p>
-                    <p>Open 24hours 4.5stars</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col">
-          <a href="dishes.php" style="text-decoration:none; color:black;">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <img src="images/restaurant2.jpg" alt="" width="100%">
-                  </div>
-                  <div class="col-10">
-                    <b>Restaurant2</b>
-                    <p>Lorem ipsum dolor sit amet,</p>
-                    <p>Open 24hours 4.5stars</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+      <?php
+      }
+      ?>
       </div>
     </div>
     <!-- Firth Container Ends -->

@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'config/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -37,6 +41,64 @@
     <!-- Fist Container Intro Ends -->
     <hr>
     <!-- Second Container -->
+    <?php
+    $stmt1 = $pdo->prepare("SELECT * FROM cart");
+    $stmt1->execute();
+    $datas = $stmt1->fetch(PDO::FETCH_ASSOC);
+    $food_id = $datas['food_id'];
+    $stmt = $pdo->prepare("SELECT * FROM dishes WHERE id=$food_id");
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $res_name = $_SESSION['res_name'];
+    $cartdatas = $pdo->prepare("SELECT * FROM cart");
+    $cartdatas->execute(
+      array(":res_name" => $res_name)
+    );
+    $cartdata = $cartdatas->fetchall();
+    $i = 0;
+    foreach ($cartdata as $cartdatas) {
+      $food_id = $cartdatas['food_id'];
+      $stmt = $pdo->prepare("SELECT * FROM dishes WHERE id=$food_id");
+      $stmt->execute();
+      $prices = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($i == 0){
+        $price = $prices['price'];
+        $totalprice = $price * $cartdatas['food_quantity'];
+      }else{
+          $price = $prices['price'];
+          $totalprice = $totalprice + $price * $cartdatas['food_quantity'];
+      }
+      $i++;
+    }
+
+
+    if($_POST){
+      $cartdatas = $pdo->prepare("SELECT * FROM cart");
+      $cartdatas->execute(
+        array(":res_name" => $res_name)
+      );
+      $cartdata = $cartdatas->fetchall();
+      foreach ($cartdata as $cartdatas) {
+        $food_id = $cartdatas['food_id'];
+        $stmt = $pdo->prepare("SELECT * FROM dishes WHERE id=$food_id");
+        $stmt->execute();
+        $dishdata = $stmt->fetch(PDO::FETCH_ASSOC);
+        // INSERT DATAS
+        $customer_name = $_SESSION['username'];
+        $dishes = $cartdatas['food_name'];
+        $price = $dishdata['price'];
+        $quantity = $cartdatas['food_quantity'];
+        $stmtinert = $pdo->prepare("INSERT INTO users_orders(customer_name, dishes, price, quantity) VALUES(:customer_name ,:dishes ,:price ,:quantity)");
+        $stmtinert->execute(
+          array(":customer_name"=>$customer_name, ":dishes"=>$dishes, ":price"=>$price, ":quantity"=>$quantity)
+        );
+      }
+      $stmtdelete = $pdo->prepare('DELETE FROM cart');
+      $stmtdelete->execute();
+      echo "<script>alert('order submitted successfully!'); window.location.href-'index.php'</script>";
+    }
+
+    ?>
     <div class="container form-control mt-5">
       <form action="checkout.php" method="post">
         <h3>Cart Summary</h3>
@@ -46,7 +108,7 @@
             <p>Cart SubTotal</p>
           </div>
           <div class="col">
-            <p>$125.25</p>
+            <p><?php echo $totalprice; ?>ks</p>
           </div>
         </div>
         <hr>
@@ -64,11 +126,11 @@
             <p>Total</p>
           </div>
           <div class="col">
-            <p>$125.25</p>
+            <p><?php echo $totalprice; ?>ks</p>
           </div>
         </div>
         <hr>
-        <input type="radio" name="paymentsystem" value="paydelivered"><p class="h5 d-inline">Payment on delivary</p>
+        <input type="radio" name="paymentsystem" value="paydelivered" checked><p class="h5 d-inline">Payment on delivary</p>
         <br>
         <input type="radio" name="paymentsystem" value="paypal"><p class="h5 d-inline">PayPal</p>
         <hr>
