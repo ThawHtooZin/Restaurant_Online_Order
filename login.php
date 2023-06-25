@@ -40,10 +40,16 @@ include 'config/connect.php';
         $stmt = $pdo->prepare("SELECT * FROM users WHERE username='$username'");
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($data['password'] == $_POST['password']){
-          echo "<script>window.location.href='Index.php';</script>";
-          $_SESSION['username'] = $data['username'];
-          $_SESSION['logged_in'] = true;
+        if(!empty($data['password'])){
+          if($data['password'] == $_POST['password']){
+            echo "<script>window.location.href='Index.php';</script>";
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['logged_in'] = true;
+          }else{
+            echo "<script>alert('invalid credential! Create an account'); window.location.href='register.php';</script>";
+          }
+        }else{
+          echo "<script>alert('invalid credential! Create an account'); window.location.href='register.php';</script>";
         }
       }
     }

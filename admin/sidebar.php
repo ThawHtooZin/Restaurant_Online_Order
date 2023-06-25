@@ -83,7 +83,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="orders_admin.php" class="nav-link">
+          <a href="order_admin.php" class="nav-link">
             <i class="bi bi-card-checklist"></i>
             <p>
               Orders

@@ -68,12 +68,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <th>Dishes</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Status</th>
+            <th>Total Price</th>
             <th>Action</th>
           </tr>
           </thead>
           <tbody>
             <?php
             foreach ($datas as $data) {
+              if($data['status'] != "cashed"){
             ?>
             <tr>
               <td><?php echo $data['id']; ?></td>
@@ -82,12 +85,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <td><?php echo $data['dishes']; ?></td>
               <td><?php echo $data['price']; ?></td>
               <td><?php echo $data['quantity']; ?></td>
+              <td><?php echo $data['status']; ?></td>
+              <td><?php echo $data['quantity'] * $data['price']; ?></td>
               <th>
-                <a href="order_update.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Update</a>
+                <a href="order_update.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Update Order</a>
                 <a href="order_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a>
               </th>
             </tr>
             <?php
+          }
             }
             ?>
           </tbody>

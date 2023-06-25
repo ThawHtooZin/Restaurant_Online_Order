@@ -51,9 +51,7 @@ include 'config/connect.php';
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     $res_name = $_SESSION['res_name'];
     $cartdatas = $pdo->prepare("SELECT * FROM cart");
-    $cartdatas->execute(
-      array(":res_name" => $res_name)
-    );
+    $cartdatas->execute();
     $cartdata = $cartdatas->fetchall();
     $i = 0;
     foreach ($cartdata as $cartdatas) {
@@ -74,9 +72,7 @@ include 'config/connect.php';
 
     if($_POST){
       $cartdatas = $pdo->prepare("SELECT * FROM cart");
-      $cartdatas->execute(
-        array(":res_name" => $res_name)
-      );
+      $cartdatas->execute();
       $cartdata = $cartdatas->fetchall();
       foreach ($cartdata as $cartdatas) {
         $food_id = $cartdatas['food_id'];
@@ -88,9 +84,10 @@ include 'config/connect.php';
         $dishes = $cartdatas['food_name'];
         $price = $dishdata['price'];
         $quantity = $cartdatas['food_quantity'];
-        $stmtinert = $pdo->prepare("INSERT INTO users_orders(customer_name, dishes, price, quantity) VALUES(:customer_name ,:dishes ,:price ,:quantity)");
+        $status = "ordered";
+        $stmtinert = $pdo->prepare("INSERT INTO users_orders(customer_name, dishes, price, quantity, status) VALUES(:customer_name ,:dishes ,:price ,:quantity ,:status)");
         $stmtinert->execute(
-          array(":customer_name"=>$customer_name, ":dishes"=>$dishes, ":price"=>$price, ":quantity"=>$quantity)
+          array(":customer_name"=>$customer_name, ":dishes"=>$dishes, ":price"=>$price, ":quantity"=>$quantity, ":status"=>$status)
         );
       }
       $stmtdelete = $pdo->prepare('DELETE FROM cart');

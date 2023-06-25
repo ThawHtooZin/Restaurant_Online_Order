@@ -39,8 +39,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         $customer_name = $_POST['customer_name'];
         $order_date = $_POST['order_date'];
         $quantity = $_POST['quantity'];
+        $status = $_POST['status'];
         $id = $_GET['id'];
-        $stmt = $pdo->prepare("UPDATE users_orders SET customer_name='$customer_name', order_date='$order_date', quantity='$quantity' WHERE id=$id");
+        $stmt = $pdo->prepare("UPDATE users_orders SET customer_name='$customer_name', order_date='$order_date', quantity='$quantity', status='$status' WHERE id=$id");
         $data = $stmt->execute();
         if($data){
           echo "<script>alert('Order Updated successfully!'); window.location.href='order_admin.php';</script>";
@@ -94,18 +95,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <label for="">Dish Name</label>
                  <select class="form-control" name="dishes">
                    <?php
-                   $stmt = $pdo->prepare("SELECT * FROM users_orders");
+                   $stmt = $pdo->prepare("SELECT * FROM dishes");
                    $stmt->execute();
                    $datas = $stmt->fetchall();
-                    foreach ($datas as $data):
+                    foreach ($datas as $dataa):
                       ?>
-                     <option value="<?php echo $data['dishes'] ?>"><?php echo $data['dishes']; ?></option>
+                     <option value="<?php echo $dataa['name'] ?>"><?php echo $dataa['name']; ?></option>
                    <?php endforeach; ?>
                  </select>
               </div>
               <div class="form-group">
                 <label for="">Quantity</label>
                 <input type="number" class="form-control <?php if($quantityerror === true){echo 'is-invalid';} ?>" placeholder="Enter Quantity" name="quantity" value="<?php echo $data['quantity'] ?>">
+              </div>
+              <div class="form-group">
+                <label for="">Status</label>
+                <select class="form-control" name="status">
+                  <option value="ordered">Ordered</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cashed">Cashed</option>
+                </select>
               </div>
             </div>
             <!-- /.card-body -->
