@@ -45,10 +45,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $dishesdatas = $dishesstmt->fetchall();
   $dishesrows = count($dishesdatas);
   // order
-  $orderstmt = $pdo->prepare("SELECT * FROM users_orders");
-  $orderstmt->execute();
-  $orderdatas = $orderstmt->fetchall();
-  $orderrows = count($orderdatas);
+  $normalorderstmt = $pdo->prepare("SELECT * FROM users_orders");
+  $normalorderstmt->execute();
+  $normalorderdatas = $normalorderstmt->fetchall();
+  $normalorderrows = count($normalorderdatas);
+
+  $cashedorderstmt = $pdo->prepare("SELECT * FROM users_orders WHERE status='cashed'");
+  $cashedorderstmt->execute();
+  $cashedorderdatas = $cashedorderstmt->fetchall();
+  $cashedorderrows = count($cashedorderdatas);
+
+  $orderrows = $normalorderrows - $cashedorderrows;
   ?>
 <div class="wrapper">
 

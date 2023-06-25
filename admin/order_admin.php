@@ -98,6 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             ?>
           </tbody>
         </table>
+        <a href="cashed_out_orders.php" class="btn btn-danger" style="float:right;">Check Cashed Out Orders</a>
       </div>
       <!-- /.card-body -->
     </div>

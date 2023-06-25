@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
   <?php
-  $stmt = $pdo->prepare("SELECT * FROM users");
+  $stmt = $pdo->prepare("SELECT * FROM users_orders WHERE status='cashed'");
   $stmt->execute();
   $datas = $stmt->fetchall();
   ?>
@@ -50,10 +50,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="card-header">
         <div class="row">
           <div class="col">
-            <h3 class="card-title">User Admin Page</h3>
+            <h3 class="card-title">Order Admin Page</h3>
           </div>
           <div class="col">
-            <h3 class="card-title" style="float:right;"><a href="user_add.php" class="btn btn-success"> + ADD</a></h3>
+
           </div>
         </div>
       </div>
@@ -63,13 +63,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <thead>
           <tr>
             <th>#</th>
-            <th>Username</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Password</th>
-            <th>Address</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Dishes</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Total Price</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -79,16 +79,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             ?>
             <tr>
               <td><?php echo $data['id']; ?></td>
-              <td><?php echo $data['username']; ?></td>
-              <td><?php echo $data['firstname']; ?></td>
-              <td><?php echo $data['lastname']; ?></td>
-              <td><?php echo $data['email']; ?></td>
-              <td><?php echo $data['phonenumber']; ?></td>
-              <td><?php echo $data['password']; ?></td>
-              <td><?php echo $data['address']; ?></td>
+              <td><?php echo $data['customer_name']; ?></td>
+              <td><?php echo $data['order_date']; ?></td>
+              <td><?php echo $data['dishes']; ?></td>
+              <td><?php echo $data['price']; ?></td>
+              <td><?php echo $data['quantity']; ?></td>
+              <td><?php echo $data['status']; ?></td>
+              <td><?php echo $data['quantity'] * $data['price']; ?></td>
               <th>
-                <a href="user_update.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Update</a>
-                <a href="user_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a>
+                <a href="order_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">Delete</a>
               </th>
             </tr>
             <?php
@@ -96,6 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             ?>
           </tbody>
         </table>
+        <a href="order_admin.php" class="btn btn-success" style="float:right;">Go Back</a>
       </div>
       <!-- /.card-body -->
     </div>
