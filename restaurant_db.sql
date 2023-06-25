@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 10:12 AM
+-- Generation Time: Jun 25, 2023 at 08:58 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -154,9 +154,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `phonenumber`, `password`, `address`) VALUES
 (1, 'Tommy', 'Tommy', 'Jefferson', 'tommy@gmail.com', 9958597848, 'tommy2008***', 'Yangon'),
-(6, 'Tommy', 'Tommy', 'Jefferson', 'tommy@gmail.com', 9958597848, 'tommy2008***', 'Yangonnnnnn'),
-(8, '', '', '', '', 0, '', ''),
-(9, '', '', '', '', 0, '', '');
+(6, 'Tommy', 'Tommy', 'Jefferson', 'tommy@gmail.com', 9958597848, 'tommy2008***', 'Yangonnnnnn');
 
 -- --------------------------------------------------------
 
@@ -170,15 +168,17 @@ CREATE TABLE `users_orders` (
   `order_date` date NOT NULL DEFAULT current_timestamp(),
   `dishes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users_orders`
 --
 
-INSERT INTO `users_orders` (`id`, `customer_name`, `order_date`, `dishes`, `price`, `quantity`) VALUES
-(5, 'Tommy', '2023-05-31', 'Tom\'s Pizza', 5000, 5);
+INSERT INTO `users_orders` (`id`, `customer_name`, `order_date`, `dishes`, `price`, `quantity`, `status`) VALUES
+(5, 'Tommy', '2023-05-31', 'Tom\'s Pizza', 5000, 5, 'delivered'),
+(7, 'Tommy', '2023-05-31', 'Tom\'s Pizza', 5000, 5, 'cashed');
 
 --
 -- Indexes for dumped tables
@@ -252,7 +252,7 @@ ALTER TABLE `admin_codes`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `dishes`
@@ -282,7 +282,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_orders`
 --
 ALTER TABLE `users_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
